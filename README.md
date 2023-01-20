@@ -82,3 +82,8 @@ regxon_html.excluded_attributes.update({
     'img': regxon_html.excluded_attributes['img'] + ['onerror'],
 })
 ```
+
+Returned HTML will be
+```html
+<img/>
+```
