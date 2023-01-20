@@ -51,10 +51,16 @@ regxon.is_url('https://xyz.com')  # True
 from regxon.common import Regxon
 
 regxon = Regxon()
-regxon.is_ipv4('http://xxz.com')  # False
-regxon.is_ipv4('http://127.0.0.1')  # True
-regxon.is_ipv4('127.0.0.1', schema='')  # True
-regxon.is_ipv4('http://127.0.0.1', schema='')  # False
+
+# 1, 2 both are same and return a proper Match, as default schema is ""
+regxon.is_ipv4('127.0.0.1')                 # 1
+regxon.is_ipv4('127.0.0.1', schema='')      # 2; matches because 127.0.0.1 has no schema
+
+regxon.is_ipv4('http://127.0.0.1')  # returns None as schema is not matched; "http" != ""
+regxon.is_ipv4('http://127.0.0.1', schema='')  # returns None as schema is not matched; "http" != ""
+
+regxon.is_ipv4('http://127.0.0.1', schema='http')  # returns a proper Match
+regxon.is_ipv4('https://127.0.0.1', schema='http')  # returns None as schema is not matched; "https" != "http"
 ```
 
 ### Validate Phone Number
@@ -67,7 +73,12 @@ regxon.is_phone('+91 1234567890')  # True
 ```
 
 ## HTML Sanitization and Validation
-HTML Validation includes validation of
+RegXon provides a powerful HTML sanitizer and validator that you're searching for decades. 
+It's a combination of [html5lib](https://pypi.org/project/html5lib/) and
+[beautifulsoup4](https://pypi.org/project/beautifulsoup4/).
+
+You "how to remove an attribute from HTML tag" problem is solved now. Or
+another problem of "how to remove a tag from HTML" is also solved.
 
 ```python
 from regxon.html import RegxonHTML
@@ -78,6 +89,14 @@ html_content = """
 <script>alert(1)</script>
 """
 html = regxon_html.get_sanitized_content(html_content)
+
+print(html)
+```
+
+The above code will print the following output
+
+```html
+<img onerror="hey"/>
 ```
 
 ### Add custom excluded attributes for any tag you want
@@ -97,7 +116,7 @@ regxon_html.excluded_attributes.update({
 })
 ```
 
-Returned HTML will be
+The above code will print the following output
 ```html
 <img/>
 ```
