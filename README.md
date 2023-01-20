@@ -53,8 +53,6 @@ regxon.is_ipv4('http://127.0.0.1', schema='') # False
 from regxon.common import Regxon
 regxon = Regxon()
 regxon.is_phone('+91 1234567890') # True
-regxon.is_phone('+91 1234567890', prefix='') # False
-regxon.is_phone('+91 1234567890', prefix='+91') # True
 ```
 
 ## HTML Sanitization and Validation

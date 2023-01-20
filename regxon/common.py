@@ -6,37 +6,47 @@ class Regxon:
     General validation includes email, domain, url, phone and ipv4.
     """
 
-    def is_email(self, email):
+    def is_email(self, email) -> re.Match | None:
         """
         Validate email address.
         """
-        return re.match(r'^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$', email)
 
-    def is_domain(self, domain):
+        email_regex = r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]{3,255}\.[a-zA-Z0-9-.]{2,}"
+        return re.match(email_regex, email)
+
+    def is_domain(self, domain) -> re.Match | None:
         """
         Validate domain name.
         """
-        return re.match(r'^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$', domain)
+        domain_regex = r'^[a-zA-Z0-9-]{3,255}\.[a-zA-Z0-9-.]{2,}$'
+        return re.match(domain_regex, domain)
 
-    def is_url(self, url, schema):
+    def is_url(self, url, schema) -> re.Match | None:
         """
-        Validate url based on schema.
+        Validate url based on schema; `://abc.com` is counted as valid if schema is empty.
         """
-        return re.match(r'^%s://[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+(:[0-9]+)?(/.*)?$' % schema, url)
+        url_regex = r'^%s://[a-zA-Z0-9-]{3,255}\.[a-zA-Z0-9-.]{2,}(:[0-9]+)?(/.*)?$' % schema
+        return re.match(url_regex, url)
 
-    def is_ipv4(self, ipv4, schema=''):
+    def is_ipv4(self, ipv4, schema='') -> re.Match | None:
         """
         Validate ipv4 based on schema.
         """
-        return re.match(r'^%s://[0-9]+(\.[0-9]+){3}(:[0-9]+)?(/.*)?$' % schema, ipv4)
+        ipv4_regex = r'^%s(\d{1,3}\.){3}\d{1,3}$' % schema
+        return re.match(ipv4_regex, ipv4)
 
-    def is_phone(self, phone, prefix=''):
+    def is_ipv6(self, ipv6) -> re.Match | None:
+        """
+        Validate ipv6.
+        """
+        ipv6_regex = r'^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$'
+        return re.match(ipv6_regex, ipv6)
+
+    def is_phone(self, phone) -> re.Match | None:
         """
         Validate phone number.
-        ```
-        regxon.is_phone('+91 1234567890') # True
-        regxon.is_phone('+91 1234567890', prefix='') # False
-        regxon.is_phone('+91 1234567890', prefix='+91') # True
-        ```
         """
-        return re.match(r'^%s[0-9]{10}$' % prefix, phone)
+        phone_regex = r"^(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))" \
+                      r"(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?$"
+        return re.match(phone_regex, phone)
+
