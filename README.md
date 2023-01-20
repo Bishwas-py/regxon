@@ -132,3 +132,24 @@ The above code will print the following output
 ```html
 <img/>
 ```
+
+## Purpose of RegXon
+-[x] Sanitize HTML; remove unwanted tags and attributes; XSS prevention
+-[x] Validate IP, URL, Domain; SSRF prevention
+-[x] Validate Email; Email spoofing prevention
+-[x] Validate Phone Number; Phone number spoofing prevention
+
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## Authors
+- [Bishwas Bhandari](https://github.com/bishwas-py) from [Webmatrices](https://webmatrices.com)
+
+## Acknowledgements
+- [html5lib](https://pypi.org/project/html5lib/)
+- [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+- [RegExr](https://regexr.com/)
