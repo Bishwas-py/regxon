@@ -21,8 +21,8 @@ General validation includes email, domain, url and ipv4.
 from regxon.common import Regxon
 
 regxon = Regxon()
-regxon.is_email('xyz@.com')  # False
-regxon.is_email('xyz@cpx.com')  # True
+regxon.is_email('xyz@.com')  # None
+regxon.is_email('xyz@cpx.com')  # returns a proper Match object; you can grab the match with `.string`
 ```
 
 ### Validate Domain
@@ -31,8 +31,8 @@ regxon.is_email('xyz@cpx.com')  # True
 from regxon.common import Regxon
 
 regxon = Regxon()
-regxon.is_domain('xyzcom')  # False
-regxon.is_domain('xyz.com')  # True
+regxon.is_domain('xyzcom')  # None
+regxon.is_domain('xyz.com')  # returns a proper Match object; you can grab the match with `.string`
 ```
 
 ### Validate URL
@@ -43,6 +43,18 @@ from regxon.common import Regxon
 regxon = Regxon()
 regxon.is_url('xyz.com')  # False
 regxon.is_url('https://xyz.com')  # True
+```
+
+### Validate HTTP URL
+
+```python
+from regxon.common import Regxon
+
+regxon = Regxon()
+regxon.is_http_url('xyz.com')  # None; returns None if the url is not http
+regxon.is_http_url('ftp://xyz.com')  # None; returns None if the url is not http
+regxon.is_http_url('http://django.c') # None; returns None because `.c` is not a valid domain 
+regxon.is_http_url('https://xyz.com')  # returns a proper Match object; you can grab the match with `.string`
 ```
 
 ### Validate IP

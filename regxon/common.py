@@ -21,12 +21,19 @@ class Regxon:
         domain_regex = r'^[a-zA-Z0-9-]{3,255}\.[a-zA-Z0-9-.]{2,}$'
         return re.match(domain_regex, domain)
 
-    def is_url(self, url, schema) -> re.Match | None:
+    def is_url(self, url, schema='') -> re.Match | None:
         """
         Validate url based on schema; `://abc.com` is counted as valid if schema is empty.
         """
         url_regex = r'^%s://[a-zA-Z0-9-]{3,255}\.[a-zA-Z0-9-.]{2,}(:[0-9]+)?(/.*)?$' % schema
         return re.match(url_regex, url)
+
+    def is_http_url(self, url) -> re.Match | None:
+        """
+        Validate http url; http and https are counted as valid.
+        """
+        http_url_regex = r'^https?://[a-zA-Z0-9-]{3,255}\.[a-zA-Z0-9-.]{2,}(:[0-9]+)?(/.*)?$'
+        return re.match(http_url_regex, url)
 
     def is_ipv4(self, ipv4, schema='') -> re.Match | None:
         """
