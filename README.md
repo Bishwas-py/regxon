@@ -41,8 +41,8 @@ regxon.is_domain('xyz.com')  # returns a proper Match object; you can grab the m
 from regxon.common import Regxon
 
 regxon = Regxon()
-regxon.is_url('xyz.com')  # False
-regxon.is_url('https://xyz.com')  # True
+regxon.is_url('xyz.com')  # None
+regxon.is_url('https://xyz.com')  # returns a proper Match object
 ```
 
 ### Validate HTTP URL
@@ -81,7 +81,7 @@ regxon.is_ipv4('https://127.0.0.1', schema='http')  # returns None as schema is 
 from regxon.common import Regxon
 
 regxon = Regxon()
-regxon.is_phone('+91 1234567890')  # True
+regxon.is_phone('+91 1234567890')  # returns a proper Match object; you can grab the match with `.string`
 ```
 
 ## HTML Sanitization and Validation
