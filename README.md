@@ -134,10 +134,10 @@ The above code will print the following output
 ```
 
 ## Purpose of RegXon
--[x] Sanitize HTML; remove unwanted tags and attributes; XSS prevention
--[x] Validate IP, URL, Domain; SSRF prevention
--[x] Validate Email; Email spoofing prevention
--[x] Validate Phone Number; Phone number spoofing prevention
+- Sanitize HTML; remove unwanted tags and attributes; XSS prevention
+- Validate IP, URL, Domain; SSRF prevention
+- Validate Email; Email spoofing prevention
+- Validate Phone Number; Phone number spoofing prevention
 
 
 ## License

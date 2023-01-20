@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="regxon",
-    version="0.0.3",
+    version="0.0.5",
     description="RegXon is a powerful validator, sanitizer and content parser that you're searching for decades.",
     long_description=long_description,
     long_description_content_type="text/markdown",
