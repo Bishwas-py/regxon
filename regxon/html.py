@@ -10,6 +10,10 @@ class RegxonHTML:
         'img': ['onload', 'src'],
     }
 
+    escaped_tags = [
+        'p'
+    ]
+
     def __init__(self, excluded_tags=None, excluded_attributes=None):
         if excluded_tags:
             self.excluded_tags = excluded_tags
@@ -24,7 +28,6 @@ class RegxonHTML:
         for tag in soup.find_all():
             if tag.name in self.excluded_tags:
                 tag_soup = BeautifulSoup(str(tag), 'html.parser')
-                print(tag_soup.new_string(''))
                 tag.replace_with(tag_soup.new_string(''))
 
             if tag.name in self.excluded_attributes.keys():
@@ -32,4 +35,8 @@ class RegxonHTML:
                     if tag.has_attr(attribute):
                         del tag[attribute]
 
-        return soup.prettify()
+            if tag.name in self.escaped_tags:
+                tag_soup = BeautifulSoup(str(tag), 'html.parser')
+                tag.replace_with(tag_soup.new_string(str(tag)))
+
+        return str(soup)
