@@ -16,9 +16,13 @@ class Regxon:
 
     def is_domain(self, domain) -> re.Match | None:
         """
-        Validate domain name.
+        Validate domain name without schema.
         """
         domain_regex = r'^[a-zA-Z0-9-]{3,255}\.[a-zA-Z0-9-.]{2,}$'
+        return re.match(domain_regex, domain)
+
+    def is_http_domain(self, domain) -> re.Match | None:
+        domain_regex = re.compile(r'^(https?://)?(www\.)?([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)')
         return re.match(domain_regex, domain)
 
     def is_url(self, url, schema='') -> re.Match | None:
