@@ -23,7 +23,7 @@ class Regxon:
 
     def is_url(self, url, schema='') -> re.Match | None:
         """
-        Validate url based on schema; `://abc.com` is counted as valid if schema is empty.
+        Validate url based on custom schema; `://abc.com` is counted as valid if schema is empty.
         """
         url_regex = r'^%s://[a-zA-Z0-9-]{3,255}\.[a-zA-Z0-9-.]{2,}(:[0-9]+)?(/.*)?$' % schema
         return re.match(url_regex, url)
@@ -41,6 +41,13 @@ class Regxon:
         """
         ipv4_regex = r'^%s(\d{1,3}\.){3}\d{1,3}$' % schema
         return re.match(ipv4_regex, ipv4)
+
+    def is_http_ip(self, ip) -> re.Match | None:
+        """
+        Validate http ip.
+        """
+        http_ip_regex = r'^https?://(\d{1,3}\.){3}\d{1,3}(:[0-9]+)?(/.*)?$'
+        return re.match(http_ip_regex, ip)
 
     def is_ipv6(self, ipv6) -> re.Match | None:
         """
