@@ -71,8 +71,10 @@ regxon.is_ipv4('127.0.0.1', schema='')      # 2; matches because 127.0.0.1 has n
 regxon.is_ipv4('http://127.0.0.1')  # returns None as schema is not matched; "http" != ""
 regxon.is_ipv4('http://127.0.0.1', schema='')  # returns None as schema is not matched; "http" != ""
 
-regxon.is_ipv4('http://127.0.0.1', schema='http')  # returns a proper Match
-regxon.is_ipv4('https://127.0.0.1', schema='http')  # returns None as schema is not matched; "https" != "http"
+regxon.is_ipv4('http://127.0.0.1', schema='http://')  # returns a proper Match
+regxon.is_ipv4('https://127.0.0.1', schema='http://')  # returns None as schema is not matched; "https" != "http"
+
+regxon.is_ipv6('2001:db8:3333:4444:5555:6666:7777:8888') # validates the ipv6 
 ```
 
 ### Validate Phone Number
